@@ -1,0 +1,17 @@
+{
+    "name": "bilel/api",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "Core\\": "Core/"
+
+        }
+    },
+    "authors": [
+        {
+            "name": "bilel-bouchoukh",
+            "email": "bilel.bouchoukh@laplateforme.io"
+        }
+    ],
+    "require": {}
+}
