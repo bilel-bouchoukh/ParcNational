@@ -28,6 +28,9 @@ final class FauneModel extends Database {
         "
         SELECT * FROM faune
         ".parent::buildClauses($filters);
+
+        parent::sqlQuery($query, $filters);
+        return $this->stmt->fetchAll() ?? [];
     }
 
     public function createFaune(array $data){
