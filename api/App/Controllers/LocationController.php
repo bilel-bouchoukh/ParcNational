@@ -20,6 +20,18 @@ final class LocationController{
         }
     }
 
+    public function index(array $filters) {
+        $results = $this->locationModel->getAllLocation($filters);
+        if($results) {
+            json_encode([
+                "success" => true,
+                "Les données récupérer"  => $results
+            ]);
+        }else {
+            json_encode("Erreur lors de la récupération");
+        }
+    }
+
     public function save(array $data){
         $results = $this->locationModel->createLocation($data);
         if($results){
