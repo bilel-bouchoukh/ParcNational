@@ -14,9 +14,9 @@ final class LocationController{
     public function show(int $id){
         $results = $this->locationModel->getLocation($id);
         if($results){
-            print_r(["Les données sont récupéré " => $results]);
+            json_encode(["Les données sont récupéré " => $results]);
         }else{
-            echo ("Erreur dans la récupération");
+            json_encode ("Erreur dans la récupération");
         }
     }
 
