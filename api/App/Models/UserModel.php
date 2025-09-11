@@ -62,12 +62,6 @@ final class UserModel extends Database {
     }
 
     public function deleteUser(int $id){
-        $query =
-            "
-            DELETE 
-            FROM users 
-            WHERE id = :id
-            ";
-        return parent::sqlQuery($query, ["id" => $id]);
+        return $this->delete($id);
     }
 }

@@ -59,13 +59,7 @@ final class LocationModel extends Database {
     }
 
     public function deleteLocation(int $id): bool {
-        $query =
-            "
-            DELETE 
-            FROM location 
-            WHERE id = :id
-            ";
-        return parent::sqlQuery($query, ["id" => $id]);
+        return $this->delete($id);
     }
 
 
