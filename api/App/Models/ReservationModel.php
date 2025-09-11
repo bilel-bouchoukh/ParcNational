@@ -39,7 +39,15 @@ final class ReservationModel extends Database {
     }
 
     public function createReservation($data): bool {
-        return $this->create($data);
+        $fields = implode(', ', array_keys($data));
+        $placeholders = implode(', ', array_map(fn($k) => ":$k", array_keys($data)));
+        $query = 
+        "
+            INSERT INTO reservation ($fields) VALUES ($placeholders)
+            INNER JOIN users ON users.id = reservation.fk_user
+            INNER JOIN location ON location.id = reservation.fk_location
+        ";
+        return parent::sqlQuery($query, $data);
     }
 
     public function deleteReservation(int $id): bool {
@@ -47,6 +55,16 @@ final class ReservationModel extends Database {
     }
 
     public function updateReservation(int $id, $data): bool {
-        return $this->update($id, $data);
+        $setters = implode(', ', array_map(fn($key) => "$key = :$key", array_keys($data)));
+        $query = 
+        "
+            UPDATE reservation 
+            SET $setters 
+            INNER JOIN users ON users.id = reservation.fk_user
+            INNER JOIN location ON location.id = reservation.fk_location
+            WHERE id = :id;
+        ";
+
+        return parent::sqlQuery($query, ["id" => $id]);
     }
 }
