@@ -37,6 +37,17 @@ final class UserModel extends Database {
         return $this->stmt->fetchAll() ?? [];
     }
 
+    public function createUser($data){
+        $fields = implode(', ', array_keys($data));
+        $placeholders = implode(', ', array_map(fn($k) => ":$k", array_keys($data)));
+        $query = 
+        "
+            INSERT INTO users ($fields) VALUES ($placeholders)
+            INNER JOIN acreditation ON acreditation.id = users.fk_acreditation
+        ";
+        return parent::sqlQuery($query, $data);
+    }
+
     public function updateUser(int $id, array $data){
         $setters = implode(', ', array_map(fn($key) => "$key = :$key", array_keys($data)));
         $query = 
