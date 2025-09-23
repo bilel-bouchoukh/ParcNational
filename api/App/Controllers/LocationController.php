@@ -14,7 +14,10 @@ final class LocationController{
     public function show(int $id){
         $results = $this->locationModel->getLocation($id);
         if($results){
-            json_encode(["Les données sont récupéré " => $results]);
+            echo json_encode([
+                'success' => true,
+                'data' => $results
+            ]);
         }else{
             json_encode ("Erreur dans la récupération");
         }
@@ -23,9 +26,9 @@ final class LocationController{
     public function index(array $filters) {
         $results = $this->locationModel->getAllLocation($filters);
         if($results) {
-            json_encode([
+            echo json_encode([
                 "success" => true,
-                "Les données récupérer"  => $results
+                "data"  => $results
             ]);
         }else {
             json_encode("Erreur lors de la récupération");
