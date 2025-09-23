@@ -25,7 +25,7 @@ final class LocationModel extends Database {
 
     public function getAllLocation(array $filters): array {
         $query ="
-        SELECT *, type_location.name 
+        SELECT location.name as title, price_per_day, description, date_start, date_end, image, type_location.name 
         FROM location 
         INNER JOIN type_location ON type_location.id = location.fk_type_location
         ".parent::buildClauses($filters);
