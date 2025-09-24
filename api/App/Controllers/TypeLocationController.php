@@ -15,9 +15,9 @@ final class TypeLocationController{
     public function index(array $filters) {
         $results = $this->typeLocationModel->getAllTypeLocation($filters);
         if($results) {
-            json_encode([
+            echo json_encode([
                 "success" => true,
-                "data" => $results
+                'data' => $results
             ]);
         } else {
             json_encode("Erreur lors de la récupération");
