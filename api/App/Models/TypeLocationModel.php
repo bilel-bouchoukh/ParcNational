@@ -12,6 +12,13 @@ final class TypeLocationModel extends Database {
     }
 
     public function getAllTypeLocation(array $filters){
-        return $this->readAll($filters);
+        $query =
+        "
+            SELECT name 
+            FROM type_location
+        ".parent::buildClauses($filters);
+
+        parent::sqlQuery($query, $filters);
+        return $this->stmt->fetchAll() ?? [];
     }
 }
